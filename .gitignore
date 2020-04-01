@@ -1,0 +1,7 @@
+__pycache__/
+
+# lint関係
+.vscode/
+
+# 仮想環境関係
+py374env/
