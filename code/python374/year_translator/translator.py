@@ -1,4 +1,4 @@
-class Translater:
+class Translator:
 
     def __init__(self):
 
