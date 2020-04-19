@@ -1,19 +1,19 @@
+from function import calculate, setting_rate
+
 print("税率の変更に伴う支払額の増減分を算出します")
 
-a = int(input("変更前の税率を入力してください\n"))
-b = int(input("変更後の税率を入力してください\n"))
-price = int(input("商品の価格を入力して下さい\n"))
+a, b = setting_rate()
 
-from function import calculate
-calculate(a, b, price)
+calculate(a, b)
 
 while True:
     print("--------------------")
     print("希望する操作を選択して下さい")
-    choice = input("1: 商品価格を再入力し結果を出力する\n0: アプリケーションを終了する\n")
+    choice = input("1: 商品価格を再入力し結果を出力する\n2: 税率の設定を変更する\n0: アプリケーションを終了する\n")
     if choice == "1":
-        price = int(input("商品の価格を入力して下さい"))
-        calculate(a, b, price)
+        calculate(a, b)
+    elif choice == "2":
+        a, b = setting_rate()
     elif choice == "0":
         print("アプリケーションを終了します")
         break
