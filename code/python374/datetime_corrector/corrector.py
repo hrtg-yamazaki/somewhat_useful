@@ -85,3 +85,15 @@ def fix_day(time, last_day):
     time = "".join(time_list)
 
     return time
+
+
+def fix_month(time):
+    time_list = list(time)
+
+    month = int(time[0:2])
+    month = month - 12
+
+    time_list = update_timelist("month", month, time_list)
+    time = "".join(time_list)
+
+    return time

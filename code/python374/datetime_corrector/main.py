@@ -1,4 +1,4 @@
-from corrector import fix_minutes, fix_hour, fix_day, last_day_of_month
+from corrector import fix_minutes, fix_hour, fix_day, fix_month, last_day_of_month
 
 print("存在しない超過した数値を繰り上げ、時刻を修正します")
 
@@ -15,8 +15,9 @@ month = int(time[0:2])
 day = int(time[3:5])
 hour = int(time[6:8])
 minute = int(time[9:11])
+last_day = last_day_of_month(month)
 
-if (minute >= 60) or (hour >= 24):
+if (minute >= 60) or (hour >= 24) or (day > last_day) or (month > 12):
 
     if minute >= 60:
         time = fix_minutes(time)
@@ -29,6 +30,11 @@ if (minute >= 60) or (hour >= 24):
     last_day = last_day_of_month(month)
     if day > last_day:
         time = fix_day(time, last_day)
+
+    month = int(time[0:2])
+    if month > 12:
+        print("年を越したため、翌年の1月を想定します")
+        time = fix_month(time)
 
     print(time)
     print("時刻を修正しました")
