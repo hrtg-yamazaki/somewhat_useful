@@ -1,5 +1,5 @@
 
-def fix_length(target, item, time_list):
+def update_timelist(target, item, time_list):
 
     if target == "minute":
         i = 9
@@ -26,8 +26,8 @@ def fix_minutes(time):
     hour = int(time[6:8])
     hour = hour + 1
 
-    time_list = fix_length("minute", minute, time_list)
-    time_list = fix_length("hour", hour, time_list)
+    time_list = update_timelist("minute", minute, time_list)
+    time_list = update_timelist("hour", hour, time_list)
 
     time = "".join(time_list)
 
@@ -42,8 +42,8 @@ def fix_hour(time):
     day = int(time[3:5])
     day = day + 1
 
-    time_list = fix_length("hour", hour, time_list)
-    time_list = fix_length("day", day, time_list)
+    time_list = update_timelist("hour", hour, time_list)
+    time_list = update_timelist("day", day, time_list)
 
     time = "".join(time_list)
 
@@ -58,8 +58,8 @@ def fix_day(time):
     month = int(time[0:2])
     month = month + 1
 
-    time_list = fix_length("day", day, time_list)
-    time_list = fix_length("month", month, time_list)
+    time_list = update_timelist("day", day, time_list)
+    time_list = update_timelist("month", month, time_list)
 
     time = "".join(time_list)
 
