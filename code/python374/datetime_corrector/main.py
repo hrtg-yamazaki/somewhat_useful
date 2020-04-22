@@ -1,4 +1,4 @@
-from corrector import fix_minutes, fix_hour
+from corrector import fix_minutes, fix_hour, fix_day
 
 print("存在しない超過した数値を繰り上げ、時刻を修正します")
 
@@ -24,6 +24,10 @@ if (minute >= 60) or (hour >= 24):
     hour = int(time[6:8])
     if hour >= 24:
         time = fix_hour(time)
+
+    day = int(time[3:5])
+    if day > 31:
+        time = fix_day(time)
 
     print(time)
     print("時刻を修正しました")

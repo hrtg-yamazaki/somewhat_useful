@@ -7,6 +7,8 @@ def fix_length(target, item, time_list):
         i = 6
     elif target == "day":
         i = 3
+    elif target == "month":
+        i = 0
 
     if item < 10:
         time_list[i:(i + 2)] = "0" + str(item)
@@ -42,6 +44,22 @@ def fix_hour(time):
 
     time_list = fix_length("hour", hour, time_list)
     time_list = fix_length("day", day, time_list)
+
+    time = "".join(time_list)
+
+    return time
+
+
+def fix_day(time):
+
+    time_list = list(time)
+    day = int(time[3:5])
+    day = day - 31
+    month = int(time[0:2])
+    month = month + 1
+
+    time_list = fix_length("day", day, time_list)
+    time_list = fix_length("month", month, time_list)
 
     time = "".join(time_list)
 
