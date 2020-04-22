@@ -18,6 +18,27 @@ def update_timelist(target, item, time_list):
     return time_list
 
 
+def last_day_of_month(month):
+
+    if month == (4 or 6 or 9 or 11):
+        last_day = 30
+    elif month == 2:
+        leap = 0
+        while (leap != "y") and (leap != "n"):
+            print("閏年を想定していますか？")
+            leap = input("(y / n)\n")
+            if leap == "y":
+                last_day = 29
+            elif leap == "n":
+                last_day = 28
+            else:
+                print("無効な値が入力されました\n y か n を入力して下さい")
+    else:
+        last_day = 31
+
+    return last_day
+
+
 def fix_minutes(time):
 
     time_list = list(time)
@@ -50,11 +71,11 @@ def fix_hour(time):
     return time
 
 
-def fix_day(time):
+def fix_day(time, last_day):
 
     time_list = list(time)
     day = int(time[3:5])
-    day = day - 31
+    day = day - last_day
     month = int(time[0:2])
     month = month + 1
 
