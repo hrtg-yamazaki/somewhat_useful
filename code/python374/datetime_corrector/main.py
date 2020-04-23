@@ -33,7 +33,7 @@ if (minute >= 60) or (hour >= 24) or (day > last_day) or (month > 12):
 
     month = int(time[0:2])
     if month > 12:
-        print("年を越したため、翌年の1月を想定します")
+        print("年を越したため、翌年以降の1月を想定します")
         time = fix_month(time)
 
     print(time)

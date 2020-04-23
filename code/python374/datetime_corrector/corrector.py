@@ -43,14 +43,16 @@ def fix_minutes(time):
 
     time_list = list(time)
     minute = int(time[9:11])
-    minute = minute - 60
     hour = int(time[6:8])
-    hour = hour + 1
 
-    time_list = update_timelist("minute", minute, time_list)
-    time_list = update_timelist("hour", hour, time_list)
+    while minute >= 60:
+        minute = minute - 60
+        hour = hour + 1
 
-    time = "".join(time_list)
+        time_list = update_timelist("minute", minute, time_list)
+        time_list = update_timelist("hour", hour, time_list)
+
+        time = "".join(time_list)
 
     return time
 
@@ -59,14 +61,16 @@ def fix_hour(time):
 
     time_list = list(time)
     hour = int(time[6:8])
-    hour = hour - 24
     day = int(time[3:5])
-    day = day + 1
 
-    time_list = update_timelist("hour", hour, time_list)
-    time_list = update_timelist("day", day, time_list)
+    while hour >= 24:
+        hour = hour - 24
+        day = day + 1
 
-    time = "".join(time_list)
+        time_list = update_timelist("hour", hour, time_list)
+        time_list = update_timelist("day", day, time_list)
+
+        time = "".join(time_list)
 
     return time
 
@@ -75,25 +79,29 @@ def fix_day(time, last_day):
 
     time_list = list(time)
     day = int(time[3:5])
-    day = day - last_day
     month = int(time[0:2])
-    month = month + 1
 
-    time_list = update_timelist("day", day, time_list)
-    time_list = update_timelist("month", month, time_list)
+    while day > last_day:
+        day = day - last_day
+        month = month + 1
 
-    time = "".join(time_list)
+        time_list = update_timelist("day", day, time_list)
+        time_list = update_timelist("month", month, time_list)
+
+        time = "".join(time_list)
 
     return time
 
 
 def fix_month(time):
+    
     time_list = list(time)
-
     month = int(time[0:2])
-    month = month - 12
 
-    time_list = update_timelist("month", month, time_list)
-    time = "".join(time_list)
+    while month > 12:
+        month = month - 12
+
+        time_list = update_timelist("month", month, time_list)
+        time = "".join(time_list)
 
     return time
