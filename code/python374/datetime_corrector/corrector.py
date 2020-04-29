@@ -20,7 +20,7 @@ def update_timelist(target, item, time_list):
 
 def last_day_of_month(month):
 
-    if month == (4 or 6 or 9 or 11):
+    if month == 4 or month == 6 or month == 9 or month == 11:
         last_day = 30
     elif month == 2:
         leap = 0
@@ -94,7 +94,7 @@ def fix_day(time, last_day):
 
 
 def fix_month(time):
-    
+
     time_list = list(time)
     month = int(time[0:2])
 
