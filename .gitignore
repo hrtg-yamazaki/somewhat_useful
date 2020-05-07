@@ -5,3 +5,6 @@ __pycache__/
 
 # 仮想環境関係
 py374env/
+
+# 作業者向けやることメモ
+issue.txt
