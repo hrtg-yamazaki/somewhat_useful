@@ -16,7 +16,7 @@ def registration():
 
     # 当月の登録があるかどうかの確認
     registed_month = False
-    with open("log/monthes_data.log", "r") as f:
+    with open("log/monthes_data.log", "r", encoding="UTF-8") as f:
         for row in f:
             month = row.rstrip()
             if this_month == month:
@@ -29,7 +29,7 @@ def registration():
 
     # 当日のデータがあるかどうか確認
     registed_today = False
-    with open("log/" + this_month + ".log", "r") as f:
+    with open("log/" + this_month + ".log", "r", encoding="UTF-8") as f:
         for row in f:
             line = row.rstrip().split(" , ")
             if line[0] == today:

@@ -1,5 +1,6 @@
 from datetime import datetime
 from register import registration
+from browser import browse
 
 
 border = "---------------------"
@@ -15,7 +16,9 @@ while True:
         print(border)
         registration()
     elif choice == "2":
-        print("データを閲覧する(開発中)")
+        print("データを閲覧する")
+        print(border)
+        browse()
     elif choice == "0":
         print("アプリケーションを終了します")
         break
