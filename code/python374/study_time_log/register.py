@@ -34,13 +34,21 @@ def registration():
             line = row.rstrip().split(" , ")
             if line[0] == today:
               registed_today = True
+              study_minutes = line[1]
 
     # 勉強時間の記録(月ごとにログを管理)
     if registed_today == False:
-        study_time = input("今日は何時間勉強しましたか？半角数字で入力してください\n")
+        study_minutes = input("今日は何時間勉強しましたか？分単位で半角数字で入力してください\n")
         with open("log/" + this_month + ".log", "a", encoding="UTF-8") as f:
-            f.write(today + " , " + study_time + "\n")
+            f.write(today + " , " + study_minutes + "\n")
         print("登録が完了しました")
-        print("( ", str_now, " の学習時間： ", study_time, " 時間 )", sep="")
     else:
         print("本日の登録は終了しています")
+
+    # 登録内容の表示
+    hour = int(study_minutes) // 60
+    if hour != 0:
+        minutes = int(study_minutes) % (hour * 60)
+    else:
+        minutes = int(study_minutes)
+    print("( ", str_now, " の学習時間： ", hour, " h ", minutes, " m )", sep="")
