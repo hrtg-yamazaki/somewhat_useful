@@ -8,3 +8,6 @@ py374env/
 
 # 作業者向けやることメモ
 issue.txt
+
+# study_time_logの出力ファイル
+log/*
