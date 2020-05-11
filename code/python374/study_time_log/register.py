@@ -10,7 +10,7 @@ def registration():
     today = now.strftime("%d")
 
     # ファイルがなければ作成しておく
-    with open("log/monthes_data.log", "a", encoding="UTF-8") as f:
+    with open("log/monthes_data.log", "a", encoding="UTF-8"):
         pass
     with open("log/" + this_month + ".log", "a", encoding="UTF-8") as f:
         pass
@@ -39,7 +39,7 @@ def registration():
 
     # 勉強時間の記録(月ごとにログを管理)
     if registed_today == False:
-        study_minutes = input("今日は何時間勉強しましたか？分単位で半角数字で入力してください\n")
+        study_minutes = input("今日はどれくらい勉強しましたか？分単位で半角数字で入力してください\n")
         with open("log/" + this_month + ".log", "a", encoding="UTF-8") as f:
             f.write(today + " , " + study_minutes + "\n")
         print("登録が完了しました")

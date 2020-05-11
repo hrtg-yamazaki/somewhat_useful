@@ -55,14 +55,20 @@ def select_month():
         index_list.append(str(i))
 
     # 月の選択
-    choice = input("0: 閲覧モードのはじめに戻る\n")
-    print(border)
-    if choice in index_list:
-        selected_month = monthes_list[int(choice) - 1]
-        monthly_data(selected_month)
+    if len(index_list) >= 1:
+        choice = input("0: 閲覧モードのはじめに戻る\n")
         print(border)
-    elif choice == "0":
-        print("１つ前の操作に戻ります")
+        if choice in index_list:
+            selected_month = monthes_list[int(choice) - 1]
+            monthly_data(selected_month)
+            print(border)
+        elif choice == "0":
+            print("１つ前の操作に戻ります")
+            print(border)
+        else:
+            print("無効な値が入力されました")
+            print("操作をやり直してください")
     else:
-        print("無効な値が入力されました")
-        print("操作をやり直してください")
+        print("( 登録されているデータはありませんでした )")
+        print("１つ前の操作に戻ります")
+        print(border)
