@@ -75,4 +75,35 @@ def select_month():
 
 
 def total_data():
-    pass
+
+    # 記録がある月をリストに格納
+    months_list = []
+    with open("log/months_data.log", "r", encoding="UTF-8") as f:
+        for row in f:
+            month = row.rstrip()
+            months_list.append(month)
+
+    # 記録がある月とそれぞれの累計実績を、辞書に格納
+    months_dict = {}
+    for month in months_list:
+        time_list = [] # 実績計算用のリスト
+        with open("log/" + month + ".log", "r", encoding="UTF-8") as f:
+            for row in f:
+                line = row.rstrip().split(" , ")
+                time = int(line[1])
+                time_list.append(time)
+        monthly_dict = {month: sum(time_list)}
+        months_dict.update(monthly_dict)
+
+    # それぞれの月の実績を一覧表示
+    for month, time in months_dict.items():
+        line = month.split("_")
+        beginning = " " + line[0] + "年" + line[1] + "月: "
+        print_time(time, beginning)
+
+    # 総学習時間を表示
+    total = sum(months_dict.values())
+    beginning = "あなたの累計学習時間： "
+    print(border + "\n")
+    print_time(total, beginning)
+    print("\nこれからも頑張っていきましょう！\n\n" + border)
