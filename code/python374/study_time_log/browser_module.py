@@ -3,29 +3,36 @@ from datetime import datetime
 
 border = "- - - - -"
 
+
+def print_time(study_time, beginning):
+
+    # 分単位で与えられた入力を表示用フォーマットに変換
+    hour = study_time // 60
+    if hour != 0:
+        minutes = study_time % (hour * 60)
+    else:
+        minutes = study_time
+        
+    print(beginning, hour, " h ", minutes, " m ", sep="")
+
+
 def monthly_data(month):
     
     print("[ ", month, " のデータ ]", sep="")
 
+    # 日別のデータを表示した上で、日別の学習時間をリストに格納
     study_time_list = []
     with open("log/" + month + ".log", "r", encoding="UTF-8") as f:
         for row in f:
             line = row.rstrip().split(" , ")
-            hour = int(line[1]) // 60
-            if hour != 0:
-                minutes = int(line[1]) % (hour * 60)
-            else:
-                minutes = int(line[1])
-            print(" ", line[0], "日 ： ", hour, " h ", minutes, " m ", sep="")
+            beginning = " " + line[0] + "日 : " # 表示文の冒頭
+            print_time(int(line[1]), beginning)
             study_time_list.append(int(line[1]))
 
+    # 月の総学習時間を表示
     total = sum(study_time_list)
-    hour = total // 60
-    if hour != 0:
-        minutes = total % (hour * 60)
-    else:
-        minutes = total
-    print("学習時間の合計は ", hour, " h ", minutes, " m です", sep="")
+    beginning = " [ " + month + " ] 学習時間の合計 : " # 表示文の冒頭
+    print_time(total, beginning)
 
 
 def select_month():
@@ -53,6 +60,7 @@ def select_month():
     if choice in index_list:
         selected_month = monthes_list[int(choice) - 1]
         monthly_data(selected_month)
+        print(border)
     elif choice == "0":
         print("１つ前の操作に戻ります")
     else:

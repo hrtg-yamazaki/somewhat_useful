@@ -1,4 +1,3 @@
-from datetime import datetime
 from register import registration
 from browser import browse
 

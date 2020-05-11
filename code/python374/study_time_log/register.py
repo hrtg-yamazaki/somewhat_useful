@@ -1,4 +1,5 @@
 from datetime import datetime
+from browser_module import print_time
 
 
 def registration():
@@ -46,9 +47,5 @@ def registration():
         print("本日の登録は終了しています")
 
     # 登録内容の表示
-    hour = int(study_minutes) // 60
-    if hour != 0:
-        minutes = int(study_minutes) % (hour * 60)
-    else:
-        minutes = int(study_minutes)
-    print("( ", str_now, " の学習時間： ", hour, " h ", minutes, " m )", sep="")
+    beginning = str_now + " の学習時間： "
+    print_time(int(study_minutes), beginning)
