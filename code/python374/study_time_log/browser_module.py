@@ -40,16 +40,16 @@ def select_month():
     print("データを閲覧したい月を選択してください")
 
     # 記録がある月をリストに格納
-    monthes_list = []
-    with open("log/monthes_data.log", "r") as f:
+    months_list = []
+    with open("log/months_data.log", "r", encoding="UTF-8") as f:
         for row in f:
             month = row.rstrip()
-            monthes_list.append(month)
+            months_list.append(month)
 
     # 選択出来る月を表示し、インデックス番号をリストに格納
     index_list = []
-    for i in range(len(monthes_list)):
-        line = monthes_list[i].split("_")
+    for i in range(len(months_list)):
+        line = months_list[i].split("_")
         i = i + 1
         print(i, ": ", line[0], "年 ", line[1], "月", sep="")
         index_list.append(str(i))
@@ -59,7 +59,7 @@ def select_month():
         choice = input("0: 閲覧モードのはじめに戻る\n")
         print(border)
         if choice in index_list:
-            selected_month = monthes_list[int(choice) - 1]
+            selected_month = months_list[int(choice) - 1]
             monthly_data(selected_month)
             print(border)
         elif choice == "0":
@@ -72,3 +72,7 @@ def select_month():
         print("( 登録されているデータはありませんでした )")
         print("１つ前の操作に戻ります")
         print(border)
+
+
+def total_data():
+    pass
