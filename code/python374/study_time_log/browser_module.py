@@ -4,6 +4,16 @@ from datetime import datetime
 border = "- - - - -"
 
 
+def listup_months():
+
+    months_list = []
+    with open("log/months_data.log", "r", encoding="UTF-8") as f:
+        for row in f:
+            month = row.rstrip()
+            months_list.append(month)
+    return months_list
+
+
 def print_time(study_time, beginning):
 
     # 分単位で与えられた入力を表示用フォーマットに変換
@@ -40,11 +50,7 @@ def select_month():
     print("データを閲覧したい月を選択してください")
 
     # 記録がある月をリストに格納
-    months_list = []
-    with open("log/months_data.log", "r", encoding="UTF-8") as f:
-        for row in f:
-            month = row.rstrip()
-            months_list.append(month)
+    months_list = listup_months()
 
     # 選択出来る月を表示し、インデックス番号をリストに格納
     index_list = []
@@ -77,11 +83,7 @@ def select_month():
 def total_data():
 
     # 記録がある月をリストに格納
-    months_list = []
-    with open("log/months_data.log", "r", encoding="UTF-8") as f:
-        for row in f:
-            month = row.rstrip()
-            months_list.append(month)
+    months_list = listup_months()
 
     # 記録がある月とそれぞれの累計実績を、辞書に格納
     months_dict = {}
