@@ -6,11 +6,13 @@ border = "- - - - -"
 
 def listup_months():
 
+    # 記録のある月をリストに格納
     months_list = []
     with open("log/months_data.log", "r", encoding="UTF-8") as f:
         for row in f:
             month = row.rstrip()
             months_list.append(month)
+
     return months_list
 
 
