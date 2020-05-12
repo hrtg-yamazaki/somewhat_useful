@@ -15,5 +15,5 @@ Python 3.7.4 を利用中です。
 以下のプログラムに関しては、個別にREADMEを作成しています。  
 ぜひご参照ください。  
   
-1. (study_time_log)[https://github.com/hrtg-yamazaki/somewhat_useful/tree/master/code/python374/study_time_log]  
+1. [study_time_log](https://github.com/hrtg-yamazaki/somewhat_useful/tree/master/code/python374/study_time_log)  
   
