@@ -6,7 +6,7 @@ border = " * * * * *"
 
 def other_operations():
 
-    print("[[ その他の操作 ]]" + border)
+    print("[[ その他の操作 ]]\n" + border)
     while True:
         print("希望する操作を選択してください")
         choice = input("1: データをリセットする\n2: 本日のデータを修正する\n0: 最初の画面に戻る\n")
