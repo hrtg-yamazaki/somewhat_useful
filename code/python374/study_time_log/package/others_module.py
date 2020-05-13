@@ -1,8 +1,8 @@
 import os
 import shutil
 from datetime import datetime
-from browser_module import print_time
-from register import registration
+from .browser_module import print_time
+from .register import registration
 
 
 border = " * * * * *"

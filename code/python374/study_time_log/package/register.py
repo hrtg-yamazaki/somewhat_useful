@@ -1,5 +1,5 @@
 from datetime import datetime
-from browser_module import print_time
+from .browser_module import print_time
 
 
 def registration():

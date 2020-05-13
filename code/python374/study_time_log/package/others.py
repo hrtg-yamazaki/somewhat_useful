@@ -1,4 +1,4 @@
-from others_module import reset_logs, fix_today_data
+from .others_module import reset_logs, fix_today_data
 
 
 border = " * * * * *"

@@ -1,4 +1,4 @@
-from browser_module import select_month, total_data
+from .browser_module import select_month, total_data
 
 
 border = "- - - - - - - - - -"
