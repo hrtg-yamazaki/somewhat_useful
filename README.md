@@ -6,14 +6,13 @@
 
 それぞれ、各ディレクトリ内の main.py から起動可能です。  
 
-#### 動作環境
-現在、venv で構築した仮想環境内で、  
-Python 3.7.4 を利用中です。  
-
 #### favorite
 
 以下のプログラムに関しては、個別にREADMEを作成しています。  
 ぜひご参照ください。  
   
 1. [study_time_log](https://github.com/hrtg-yamazaki/somewhat_useful/tree/master/code/python374/study_time_log)  
-  
+
+#### 動作環境
+現在、venv で構築した仮想環境内で、  
+Python 3.7.4 を利用中です。  

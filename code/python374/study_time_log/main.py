@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
-from package.register import registration
-from package.browser import browse
-from package.others import other_operations
+from package import *
 
 
 # どこから起動してもopen関数のパス指定に影響が出ないよう、ディレクトリを切り替えておく
