@@ -23,12 +23,12 @@ class User:
 
 
 class Validator():
+    # Validatorを汎用クラス化できないか考える => 出来そうならここをUserValidator(Validator)に
     """
     バリデーションメソッドをまとめて管理するためのクラス。
     フォーマット確認用の正規表現は、ファイル冒頭でまとめて定義。
     REGEXにマッチすればそのまま返し、マッチしなければもう一度入力を促しつつ再帰。
     """
-
     def validate_username(self, username):
         """
         User.usernameのバリデーション。
@@ -41,7 +41,7 @@ class Validator():
             else:
                 message = "Enter a valid username."
             print(message)
-            username = self.validate_username(input("Username:"))
+            username = self.validate_username(input("Username: "))
         return username
 
     def validate_email(self, email):
