@@ -1,4 +1,4 @@
-from .user import User
+from .user import User, Validator
 
 
 def main():
@@ -7,7 +7,8 @@ def main():
     現在開発中...
     """
     # 入力を受け取る
-    username = input("Username: ")
+    v = Validator()
+    username = v.validate_username(input("Username: "))
     email = input("Email address: ")
     password = input("Password: ")
     password_conf = input("Password (again): ")
