@@ -20,11 +20,6 @@ def receive_inputs():
     v = Validator()
     username = v.validate_username(input("Username: "))
     email = v.validate_email(input("Email address: "))
-    password = input("Password: ")
-    password_conf = input("Password (again): ")
-    # パスワードとパスワード確認用入力の一致確認
-    if password != password_conf:
-        print("Your passwords didn\'t match.")
-        receive_inputs()
+    password = v.validate_password(input("Password: "))
     
     return username, email, password

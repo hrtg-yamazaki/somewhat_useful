@@ -3,7 +3,8 @@ import re
 
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
 EMAIL_REGEX = r"^[a-zA-Z0-9-_.]{1,30}@[a-zA-Z0-9.]{1,20}.[a-zA-Z0-9]{2,10}$"
-
+PASSWORD_REGEX = r"^[a-zA-Z0-9]{8,128}$"
+COMMON_WORDS_REGEX = r".+[(test|password|user|abcd|1234)].+"
 
 
 class User:
@@ -52,3 +53,34 @@ class Validator():
             print(message)
             email = self.validate_email(input("Email address: "))
         return email
+
+    def validate_password(self, password):
+        """
+        User.passwordのバリデーション。
+        """
+        # 確認用パスワードの入力と一致確認、不一致なら再帰
+        if not self.confirm_password(password):
+            password = self.validate_password(input("Password: "))
+        # 正規表現によるバリデーション
+        if not bool(re.match(PASSWORD_REGEX, password)):
+            if bool(re.search(COMMON_WORDS_REGEX, password)):
+                message = "This password is too common."
+            elif len(password) < 8:
+                message = "This password is too short. 4 characters min."
+            elif len(password) > 128:
+                message = "This password is too long. 128 characters max."
+            else:
+                message = "Enter a valid password."
+            print(message)
+            password = self.validate_password(input("Password: "))
+        return password
+
+    def confirm_password(self, password):
+        """
+        確認用パスワードの入力を促し、最初の入力と一致するか確認する関数
+        """
+        password_conf = input("Password (again): ")
+        if password != password_conf:
+            print("Your passwords didn\'t match.")
+            return False
+        return True
