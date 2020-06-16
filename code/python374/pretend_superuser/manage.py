@@ -1,6 +1,6 @@
+import argparse
 import os
 from pathlib import Path
-import argparse
 
 from package import pretend
 
@@ -29,10 +29,10 @@ def main(func):
     このプログラムの実行関数。
     コマンドライン引数を受け取って、起動する関数を振り分ける。
     """
-    if func == "default":
-        default_message()
-    elif func == "pretendsuperuser":
+    if func == "pretendsuperuser":
         pretend_superuser()
+    else:
+        default_message()
 
 
 if __name__ == "__main__":
