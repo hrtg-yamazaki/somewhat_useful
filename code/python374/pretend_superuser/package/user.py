@@ -2,6 +2,8 @@ import re
 
 
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
+EMAIL_REGEX = r"^[a-zA-Z0-9-_.]{1,30}@[a-zA-Z0-9.]{1,20}.[a-zA-Z0-9]{2,10}$"
+
 
 
 class User:
@@ -40,3 +42,13 @@ class Validator():
             print(message)
             username = self.validate_username(input("Username:"))
         return username
+
+    def validate_email(self, email):
+        """
+        User.emailのバリデーション。
+        """
+        if not bool(re.match(EMAIL_REGEX, email)):
+            message = "Enter a valid email address."
+            print(message)
+            email = self.validate_email(input("Email address: "))
+        return email

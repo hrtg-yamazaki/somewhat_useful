@@ -19,7 +19,7 @@ def receive_inputs():
     """
     v = Validator()
     username = v.validate_username(input("Username: "))
-    email = input("Email address: ")
+    email = v.validate_email(input("Email address: "))
     password = input("Password: ")
     password_conf = input("Password (again): ")
     # パスワードとパスワード確認用入力の一致確認
