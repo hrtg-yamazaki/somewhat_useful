@@ -28,7 +28,7 @@ class Validator():
 
     def validate_username(self, username):
         """
-        usernameのバリデーション
+        User.usernameのバリデーション。
         """
         if not bool(re.match(USERNAME_REGEX, username)):
             if len(username) < 4:
