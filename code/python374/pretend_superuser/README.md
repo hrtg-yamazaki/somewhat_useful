@@ -10,7 +10,7 @@ pythonの標準ライブラリの復習を目的に作成中です。
 djangoのmanage.pyと同じ感覚で起動できるようにしています。  
 
 現状、  
-"""
+```
 $ python3 manage.py createsuperuser
-"""
+```
 が、利用可能です。  
