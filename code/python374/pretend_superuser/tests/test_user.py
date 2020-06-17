@@ -52,7 +52,14 @@ class TestValidator(unittest.TestCase):
         Falseを返すかどうか。
         """
         v = Validator()
+        # too short
         username = "tes"
+        self.assertFalse(v.username_is_valid(username))
+        # too long
+        username = "1234567890123456789012345678901"
+        self.assertFalse(v.username_is_valid(username))
+        # unspecified characters
+        username = "テストユーザー"
         self.assertFalse(v.username_is_valid(username))
       
     def test_username_error_with_too_short_username(self):
@@ -79,7 +86,7 @@ class TestValidator(unittest.TestCase):
 
     def test_username_error_with_unspecified_characters(self):
         """
-        Validator.username_is_valid()のユニットテスト。
+        Validator.username_error()のユニットテスト。
         [a-zA-Z0-9-_]以外の文字が渡された場合に
         適切なメッセージを返すかどうか。
         """
@@ -87,6 +94,49 @@ class TestValidator(unittest.TestCase):
         username = "テストユーザー"
         expected = "Enter a valid username."
         actual = v.username_error(username)
+        self.assertEqual(expected, actual)
+
+    def test_email_is_valid(self):
+        """
+        Validator.email_is_valid()に
+        適切な値が渡された場合Trueを返すかどうか。
+        """
+        v = Validator()
+        email = "test@test.com"
+        self.assertTrue(v.email_is_valid(email))
+    
+    def test_email_is_invalid(self):
+        """
+        Validator.email_is_valid()のテスト。
+        正規表現で指定したフォーマットに合わない値が渡された場合、
+        Falseを返すかどうか。
+        """
+        v = Validator()
+        email = "testemailaddress"
+        self.assertFalse(v.email_is_valid(email))
+        email = "テスト@テスト.com"
+        self.assertFalse(v.email_is_valid(email))
+    
+    def test_email_error_without_atmark(self):
+        """
+        validator.email_error()のテスト。
+        @以上の場合に適切なメッセージを返すかどうか。
+        """
+        v = Validator()
+        email = "testemailaddress"
+        expected = "Enter a valid email address."
+        actual = v.email_error(email)
+        self.assertEqual(expected, actual)
+
+    def test_email_error_with_unspecified_characters(self):
+        """
+        validator.email_error()のテスト。
+        @以上の場合に適切なメッセージを返すかどうか。
+        """
+        v = Validator()
+        email = "テスト@テスト.com"
+        expected = "Enter a valid email address."
+        actual = v.email_error(email)
         self.assertEqual(expected, actual)
 
 
