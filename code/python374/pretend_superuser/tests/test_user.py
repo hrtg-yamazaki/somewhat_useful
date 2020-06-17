@@ -1,10 +1,11 @@
 import os
+import sys
 from pathlib import Path
 
 
 # ディレクトリをプロジェクト"pretend_superuser"に切り替え
 project_path = Path(__file__).parent.parent
-os.chdir(project_path)
+sys.path.append(str(project_path))
 
 
 import unittest
