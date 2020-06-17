@@ -4,7 +4,7 @@ from .user import User, Validator
 def receive_inputs():
     """
     コンソールからの入力を受け取る関数。
-    受け取りは絡むごとに一回ずつ。
+    受け取りはカラムごとに一回ずつ。
     返り値はタプルで、呼び出し元にてアンパック代入。
     """
     v = Validator()

@@ -40,7 +40,7 @@ class Validator():
     
     def username_error(self, username):
         """
-        usernameのバリデーションメッセージを返す関数。
+        User.usernameのバリデーションメッセージを返す関数。
         """
         if len(username) < 4:
             message = "This username is too short. 4 characters min."
@@ -61,7 +61,7 @@ class Validator():
 
     def email_error(self, email):
         """
-        emailのバリデーションメッセージを返す関数。
+        User.emailのバリデーションメッセージを返す関数。
         """
         message = "Enter a valid email address."
         return message
@@ -90,7 +90,7 @@ class Validator():
 
     def password_error(self, password):
         """
-        パスワードのバリデーションメッセージを返す関数
+        User.passwordのバリデーションメッセージを返す関数
         """
         if len(password) < 8:
             message = "This password is too short. 8 characters min."

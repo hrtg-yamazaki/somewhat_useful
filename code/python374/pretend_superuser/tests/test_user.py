@@ -34,5 +34,61 @@ class TestUser(unittest.TestCase):
         self.assertFalse(user.superuser)
 
 
+class TestValidator(unittest.TestCase):
+
+    def test_username_is_valid(self):
+        """
+        Validator.username_is_valid()に
+        適切な値が渡された場合Trueを返すかどうか。
+        """
+        v = Validator()
+        username = "testuser"
+        self.assertTrue(v.username_is_valid(username))
+
+    def test_username_is_invalid(self):
+        """
+        Validator.username_is_valid()のテスト。
+        正規表現で指定したフォーマットに合わない値が渡された場合、
+        Falseを返すかどうか。
+        """
+        v = Validator()
+        username = "tes"
+        self.assertFalse(v.username_is_valid(username))
+      
+    def test_username_error_with_too_short_username(self):
+        """
+        validator.username_error()のテスト。
+        3文字以下の場合に適切なメッセージを返すかどうか。
+        """
+        v = Validator()
+        username = "tes"
+        expected = "This username is too short. 4 characters min."
+        actual = v.username_error(username)
+        self.assertEqual(expected, actual)
+
+    def test_username_error_with_too_long_username(self):
+        """
+        validator.username_error()のテスト。
+        31文字以上の場合に適切なメッセージを返すかどうか。
+        """
+        v = Validator()
+        username = "1234567890123456789012345678901"
+        expected = "This username is too long. 30 characters max."
+        actual = v.username_error(username)
+        self.assertEqual(expected, actual)
+
+    def test_username_error_with_unspecified_characters(self):
+        """
+        Validator.username_is_valid()のユニットテスト。
+        [a-zA-Z0-9-_]以外の文字が渡された場合に
+        適切なメッセージを返すかどうか。
+        """
+        v = Validator()
+        username = "テストユーザー"
+        expected = "Enter a valid username."
+        actual = v.username_error(username)
+        self.assertEqual(expected, actual)
+
+
 if __name__ == "__main__":
     unittest.main()
