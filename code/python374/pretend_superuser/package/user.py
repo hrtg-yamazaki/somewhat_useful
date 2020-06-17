@@ -4,7 +4,7 @@ import re
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
 EMAIL_REGEX = r"^[a-zA-Z0-9-_.]{1,30}@[a-zA-Z0-9.]{1,20}.[a-zA-Z0-9]{2,10}$"
 PASSWORD_REGEX = r"^[a-zA-Z0-9]{8,128}$"
-COMMON_WORDS_REGEX = r"test|password|user|abcd|1234"
+COMMON_WORDS_REGEX = r"test|password|user|abcd|12345678"
 
 
 class User:
