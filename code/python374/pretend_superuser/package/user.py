@@ -15,11 +15,11 @@ class User:
         self.password = password
         self.superuser = superuser
 
-    def print_data(self):
+    def data(self):
         """
-        デバッグ用にインスタンス変数を一覧表示する関数
+        デバッグ用にインスタンス変数を一覧表示するための関数
         """
-        print(self.username, self.email, self.password, self.superuser, sep="\n")
+        return self.username + "\n" + self.email + "\n" + self.password + "\n" + self.superuser
 
 
 class Validator():
