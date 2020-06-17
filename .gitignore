@@ -11,3 +11,6 @@ issue.txt
 
 # ログファイル
 *.log
+
+# python coverageファイル
+.coverage

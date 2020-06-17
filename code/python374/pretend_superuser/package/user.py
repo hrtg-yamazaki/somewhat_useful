@@ -4,7 +4,7 @@ import re
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
 EMAIL_REGEX = r"^[a-zA-Z0-9-_.]{1,30}@[a-zA-Z0-9.]{1,20}.[a-zA-Z0-9]{2,10}$"
 PASSWORD_REGEX = r"^[a-zA-Z0-9]{8,128}$"
-COMMON_WORDS_REGEX = r".+[(test|password|user|abcd|1234)].+"
+COMMON_WORDS_REGEX = r"test|password|user|abcd|1234"
 
 
 class User:
@@ -19,7 +19,7 @@ class User:
         """
         デバッグ用にインスタンス変数を一覧表示するための関数
         """
-        return self.username + "\n" + self.email + "\n" + self.password + "\n" + self.superuser
+        return self.username + "\n" + self.email + "\n" + self.password + "\n" + str(self.superuser)
 
 
 class Validator():
@@ -29,58 +29,76 @@ class Validator():
     フォーマット確認用の正規表現は、ファイル冒頭でまとめて定義。
     REGEXにマッチすればそのまま返し、マッチしなければもう一度入力を促しつつ再帰。
     """
-    def validate_username(self, username):
+    def username_is_valid(self, username):
         """
         User.usernameのバリデーション。
         """
         if not bool(re.match(USERNAME_REGEX, username)):
-            if len(username) < 4:
-                message = "This username is too short. 4 characters min."
-            elif len(username) > 30:
-                message = "This username is too long. 30 characters max."
-            else:
-                message = "Enter a valid username."
-            print(message)
-            username = self.validate_username(input("Username: "))
-        return username
+            print(self.username_error(username))
+            return False
+        return True
+    
+    def username_error(self, username):
+        """
+        usernameのバリデーションメッセージを返す関数。
+        """
+        if len(username) < 4:
+            message = "This username is too short. 4 characters min."
+        elif len(username) > 30:
+            message = "This username is too long. 30 characters max."
+        else:
+            message = "Enter a valid username."
+        return message
 
-    def validate_email(self, email):
+    def email_is_valid(self, email):
         """
         User.emailのバリデーション。
         """
         if not bool(re.match(EMAIL_REGEX, email)):
-            message = "Enter a valid email address."
-            print(message)
-            email = self.validate_email(input("Email address: "))
-        return email
+            print(self.email_error(email))
+            return False
+        return True
 
-    def validate_password(self, password):
+    def email_error(self, email):
+        """
+        emailのバリデーションメッセージを返す関数。
+        """
+        message = "Enter a valid email address."
+        return message
+
+    def password_is_valid(self, password, password_conf):
         """
         User.passwordのバリデーション。
         """
-        # 確認用パスワードの入力と一致確認、不一致なら再帰
-        if not self.confirm_password(password):
-            password = self.validate_password(input("Password: "))
-        # 正規表現によるバリデーション
-        if not bool(re.match(PASSWORD_REGEX, password)):
-            if bool(re.search(COMMON_WORDS_REGEX, password)):
-                message = "This password is too common."
-            elif len(password) < 8:
-                message = "This password is too short. 4 characters min."
-            elif len(password) > 128:
-                message = "This password is too long. 128 characters max."
-            else:
-                message = "Enter a valid password."
-            print(message)
-            password = self.validate_password(input("Password: "))
-        return password
-
-    def confirm_password(self, password):
-        """
-        確認用パスワードの入力を促し、最初の入力と一致するか確認する関数
-        """
-        password_conf = input("Password (again): ")
+        # 確認用パスワードの入力と一致確認
         if password != password_conf:
-            print("Your passwords didn\'t match.")
+            print(self.not_match_error())
+            return False
+        # 正規表現によるバリデーション
+        if not bool(re.match(PASSWORD_REGEX, password)) or\
+                bool(re.search(COMMON_WORDS_REGEX, password)):
+            print(self.password_error(password))
             return False
         return True
+
+    def not_match_error(self):
+        """
+        passwordとpassword_confの不一致時のエラーメッセージを返す関数
+        """
+        message = "Your password didn\'t match."
+        return message
+
+    def password_error(self, password):
+        """
+        パスワードのバリデーションメッセージを返す関数
+        """
+        if len(password) < 8:
+            message = "This password is too short. 8 characters min."
+        elif len(password) > 128:
+            message = "This password is too long. 128 characters max."
+        elif bool(re.search(COMMON_WORDS_REGEX, password)):
+            message = "This password is too common."
+        else:
+            message = "Enter a valid password."
+        return message
+  
