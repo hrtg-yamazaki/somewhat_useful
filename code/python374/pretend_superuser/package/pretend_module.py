@@ -25,13 +25,3 @@ def receive_inputs():
         password_conf = input("Password (again): ")
     
     return username, email, password
-
-
-def new_user(*args, **kwargs):
-    """
-    Userクラスのインスタンスを作成する関数。
-    """
-    # セキュリティ？的に問題なければ*args, **kwargsのまま飛ばしたい
-    # 他の方法で、「呼び出し元依存の superuser T/F 設定」ができるならあとで修正
-    user = User(*args, **kwargs)
-    return user
