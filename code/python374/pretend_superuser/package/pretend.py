@@ -9,6 +9,7 @@ def createsuperuser():
     """
     username, email, password = receive_inputs()
     user = User.new_user(username, email, password)
+    user.create_user()
     print("Pretend to create superuser successfully.")
     print(user.data())
 

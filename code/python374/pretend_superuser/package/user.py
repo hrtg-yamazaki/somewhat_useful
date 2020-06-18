@@ -20,9 +20,17 @@ class User:
 
     def data(self):
         """
-        デバッグ用にインスタンス変数を一覧表示するための関数
+        書き込み用、デバッグ用にインスタンス変数のリストを返す関数。
         """
-        return self.username + "\n" + self.email + "\n" + self.password + "\n" + str(self.superuser)
+        return [self.username, self.email, self.password, str(self.superuser)]
+
+    def create_user(self):
+        """
+        Userインスタンスをcsvファイルに書き込み、永続化するための関数。
+        """
+        with open(USERS_CSV_PATH, "a", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(self.data())
 
     @staticmethod
     def new_user(*args, **kwargs):

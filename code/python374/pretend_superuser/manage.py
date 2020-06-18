@@ -22,15 +22,15 @@ def default_message():
     コマンドライン引数が何も受け取らなかった時に起動する関数。
     メッセージを表示してプログラムを終了する。
     """
-    print("Please execute this with the command \"pretendsuperuser\"!")
+    print("Please execute this with the command \"createsuperuser\"!")
 
 
 def set_users_csv():
     """
     users.csvファイルがなければ作成しておくための関数。
     """
-    with open(USERS_CSV_PATH, "a", encoding="utf-8") as f:
-      pass
+    with open(USERS_CSV_PATH, "a", encoding="utf-8"):
+        pass
 
 
 def main(func):
