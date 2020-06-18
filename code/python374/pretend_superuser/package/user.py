@@ -1,5 +1,6 @@
 import re
 import csv
+from datetime import datetime
 
 
 USERS_CSV_PATH = "csv/users.csv"
@@ -16,13 +17,14 @@ class User:
         self.username = username
         self.email = email
         self.password = password
+        self.created_at = datetime.now().strftime("%Y/%m/%d_%H:%M:%S")
         self.superuser = superuser
 
     def data(self):
         """
         書き込み用、デバッグ用にインスタンス変数のリストを返す関数。
         """
-        return [self.username, self.email, self.password, str(self.superuser)]
+        return [self.username, self.email, self.created_at, str(self.superuser)]
 
     def create_user(self):
         """
