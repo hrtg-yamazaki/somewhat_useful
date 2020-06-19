@@ -10,6 +10,30 @@ PASSWORD_REGEX = r"^[a-zA-Z0-9]{8,128}$"
 COMMON_WORDS_REGEX = r"test|password|user|abcd|12345678"
 
 
+class Users:
+
+    def __init__(self):
+        self.users = []
+
+    def latest_user(self):
+        user = self.users[-1]
+        return user
+
+    def read_users(self):
+        """
+        user.csvファイルに記録されている全てのUserを、
+        インスタンス化したのちにself.usersに格納する関数。
+        """
+        with open(USERS_CSV_PATH, "r", encoding="utf-8") as f:
+            for row in f:
+                columns = row.rstrip().split(",")
+                username, email, password, created_at, superuser = (
+                    columns[0], columns[1], columns[2], columns[3], columns[4]
+                )
+                user = User(username, email, password, created_at, superuser)
+                self.users.append(user)
+
+
 class User:
     
     def __init__(self, username, email, password, created_at, superuser=False):
@@ -43,17 +67,6 @@ class User:
         user = User(*args, **kwargs)
         return user
 
-    @staticmethod
-    def latest_user():
-        """
-        csvファイルから最新一件のユーザーを読み込み、Userインスタンスを返す関数。
-        """
-        with open(USERS_CSV_PATH, "r", encoding="utf-8") as f:
-            row = f.readlines()[-1].rstrip().split(",")
-            username, email, password, created_at, superuser = (
-                row[0], row[1], row[2], row[3], row[4]
-            )
-        return User(username, email, password, created_at, superuser=superuser)
 
 
 class Validator():

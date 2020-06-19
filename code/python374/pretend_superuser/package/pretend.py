@@ -1,6 +1,6 @@
 from .pretend_func import receive_inputs
 from .general import str_now
-from .user import User
+from .user import User, Users
 
 
 def createsuperuser():
@@ -12,7 +12,6 @@ def createsuperuser():
     user = User.new_user(username, email, password, str_now())
     user.create_user()
     print("Pretend to create superuser successfully.")
-    print(User.latest_user().data())
 
 
 def runserver():
@@ -23,3 +22,8 @@ def runserver():
     # adminとuser(su=False)の機能をここにつける
     # 他にも startapp あたりのレスキューを後々作っておきたい
     print("Now developing.....")
+
+    users = Users()
+    users.read_users()
+    user = users.latest_user()
+    print(user.data())
