@@ -11,16 +11,9 @@ PASSWORD_REGEX = r"^[a-zA-Z0-9]{8,128}$"
 COMMON_WORDS_REGEX = r"test|password|user|abcd|12345678"
 
 
-def str_now():
-    """
-    現在時刻を表示用フォーマットの文字列に変換して返す関数
-    """
-    return datetime.now().strftime("%Y/%m/%d_%H:%M:%S")
-
-
 class User:
     
-    def __init__(self, username, email, password, created_at=str_now(), superuser=False):
+    def __init__(self, username, email, password, created_at, superuser=False):
         self.username = username
         self.email = email
         self.password = password

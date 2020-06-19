@@ -1,4 +1,5 @@
-from .pretend_module import receive_inputs
+from .pretend_func import receive_inputs
+from .general import str_now
 from .user import User
 
 
@@ -8,7 +9,7 @@ def createsuperuser():
     現在開発中...
     """
     username, email, password = receive_inputs()
-    user = User.new_user(username, email, password)
+    user = User.new_user(username, email, password, str_now())
     user.create_user()
     print("Pretend to create superuser successfully.")
     print(User.latest_user().data())
