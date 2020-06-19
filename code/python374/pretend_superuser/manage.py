@@ -2,19 +2,10 @@ import argparse
 import os
 from pathlib import Path
 
-from package import pretend
-from package.user import USERS_CSV_PATH
+from package import pretend, user, general
 
 
 os.chdir(Path(__file__).parent)
-
-
-def createsuperuser():
-    """
-    このプログラムで動かしたいメインの関数。
-    現在開発中・・・・
-    """
-    pretend.createsuperuser()
 
 
 def default_message():
@@ -25,22 +16,16 @@ def default_message():
     print("Please execute this with the command \"createsuperuser\"!")
 
 
-def set_users_csv():
-    """
-    users.csvファイルがなければ作成しておくための関数。
-    """
-    with open(USERS_CSV_PATH, "a", encoding="utf-8"):
-        pass
-
-
 def main(func):
     """
     このプログラムの実行関数。
     コマンドライン引数を受け取って、起動する関数を振り分ける。
     """
-    set_users_csv()
+    general.set_users_csv()
     if func == "createsuperuser":
-        createsuperuser()
+        pretend.createsuperuser()
+    elif func == "runserver":
+        pretend.runserver()
     else:
         default_message()
 
@@ -49,8 +34,9 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="pretend \"createsuperuser\"")
     parser.add_argument(
-        "function", default="default", nargs="?", choices=["default", "createsuperuser"],
-        help="利用機能の選択。 exec / createsuperuser "
+        "function", default="default", nargs="?",
+        choices=["default", "createsuperuser", "runserver"],
+        help="利用機能の選択。 createsuperuser / runserver"
     )
     args = parser.parse_args()
 

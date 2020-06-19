@@ -1,9 +1,8 @@
 import re
 import csv
 from datetime import datetime
+from .general import USERS_CSV_PATH
 
-
-USERS_CSV_PATH = "csv/users.csv"
 
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
 EMAIL_REGEX = r"^[a-zA-Z0-9-_.]{1,30}@[a-zA-Z0-9.]{1,20}.[a-zA-Z0-9]{2,10}$"

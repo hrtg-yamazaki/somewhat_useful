@@ -22,4 +22,4 @@ def runserver():
     """
     # adminとuser(su=False)の機能をここにつける
     # 他にも startapp あたりのレスキューを後々作っておきたい
-    pass
+    print("Now developing.....")
