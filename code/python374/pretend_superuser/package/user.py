@@ -11,20 +11,27 @@ PASSWORD_REGEX = r"^[a-zA-Z0-9]{8,128}$"
 COMMON_WORDS_REGEX = r"test|password|user|abcd|12345678"
 
 
+def str_now():
+    """
+    現在時刻を表示用フォーマットの文字列に変換して返す関数
+    """
+    return datetime.now().strftime("%Y/%m/%d_%H:%M:%S")
+
+
 class User:
     
-    def __init__(self, username, email, password, superuser=False):
+    def __init__(self, username, email, password, created_at=str_now(), superuser=False):
         self.username = username
         self.email = email
         self.password = password
-        self.created_at = datetime.now().strftime("%Y/%m/%d_%H:%M:%S")
+        self.created_at = created_at
         self.superuser = superuser
 
     def data(self):
         """
         書き込み用、デバッグ用にインスタンス変数のリストを返す関数。
         """
-        return [self.username, self.email, self.created_at, str(self.superuser)]
+        return [self.username, self.email, self.password, self.created_at, str(self.superuser)]
 
     def create_user(self):
         """
@@ -44,6 +51,17 @@ class User:
         user = User(*args, **kwargs)
         return user
 
+    @staticmethod
+    def latest_user():
+        """
+        csvファイルから最新一件のユーザーを読み込み、Userインスタンスを返す関数。
+        """
+        with open(USERS_CSV_PATH, "r", encoding="utf-8") as f:
+            row = f.readlines()[-1].rstrip().split(",")
+            username, email, password, created_at, superuser = (
+                row[0], row[1], row[2], row[3], row[4]
+            )
+        return User(username, email, password, created_at, superuser=superuser)
 
 
 class Validator():

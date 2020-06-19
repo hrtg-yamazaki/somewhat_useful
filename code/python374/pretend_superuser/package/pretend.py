@@ -11,7 +11,7 @@ def createsuperuser():
     user = User.new_user(username, email, password)
     user.create_user()
     print("Pretend to create superuser successfully.")
-    print(user.data())
+    print(User.latest_user().data())
 
 
 def runserver():
