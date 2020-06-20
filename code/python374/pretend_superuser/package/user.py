@@ -1,7 +1,7 @@
 import re
 import csv
 from datetime import datetime
-from .general import USERS_CSV_PATH
+from .general import USERS_CSV_PATH, next_id
 
 
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
@@ -27,16 +27,23 @@ class Users:
         with open(USERS_CSV_PATH, "r", encoding="utf-8") as f:
             for row in f:
                 columns = row.rstrip().split(",")
-                username, email, password, created_at, superuser = (
-                    columns[0], columns[1], columns[2], columns[3], columns[4]
+                u_id, username, email, password, created_at, superuser = (
+                    columns[0], columns[1], columns[2],
+                    columns[3], columns[4], columns[5]
                 )
-                user = User(username, email, password, created_at, superuser)
+                user = User(
+                    u_id, username, email, password, created_at, superuser
+                )
                 self.users.append(user)
 
 
 class User:
     
-    def __init__(self, username, email, password, created_at, superuser=False):
+    def __init__(
+            self, username, email, password, created_at,
+            superuser=False, u_id=next_id(USERS_CSV_PATH)
+        ):
+        self.id = u_id
         self.username = username
         self.email = email
         self.password = password
@@ -47,7 +54,10 @@ class User:
         """
         書き込み用、デバッグ用にインスタンス変数のリストを返す関数。
         """
-        return [self.username, self.email, self.password, self.created_at, str(self.superuser)]
+        return [
+            self.id, self.username, self.email, self.password,
+            self.created_at, str(self.superuser)
+        ]
 
     def create_user(self):
         """

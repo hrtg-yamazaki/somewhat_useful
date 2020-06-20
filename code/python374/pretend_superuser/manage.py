@@ -16,6 +16,14 @@ def default_message():
     print("Please execute this with the command \"createsuperuser\"!")
 
 
+def debug():
+    """
+    デバッグ用の関数。
+    個別の関数を呼び出し、正常に動いているかを確かめるのに使う。
+    """
+    print(general.next_id("csv/users.csv"))
+
+
 def main(func):
     """
     このプログラムの実行関数。
@@ -26,6 +34,8 @@ def main(func):
         pretend.createsuperuser()
     elif func == "runserver":
         pretend.runserver()
+    elif func == "debug":
+        debug()
     else:
         default_message()
 
@@ -35,7 +45,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="pretend \"createsuperuser\"")
     parser.add_argument(
         "function", default="default", nargs="?",
-        choices=["default", "createsuperuser", "runserver"],
+        choices=["default", "createsuperuser", "runserver", "debug"],
         help="利用機能の選択。 createsuperuser / runserver"
     )
     args = parser.parse_args()
