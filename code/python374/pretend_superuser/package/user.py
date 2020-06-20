@@ -16,6 +16,9 @@ class Users:
         self.users = []
 
     def latest_user(self):
+        """
+        userクラスの最新のインスタンスを返す関数
+        """
         user = self.users[-1]
         return user
 

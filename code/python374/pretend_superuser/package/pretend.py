@@ -14,6 +14,7 @@ def createsuperuser():
     print("Pretend to create superuser successfully.")
 
 
+
 def runserver():
     """
     コマンドライン引数に runserver を受け取った場合の実行関数。
@@ -21,9 +22,37 @@ def runserver():
     """
     # adminとuser(su=False)の機能をここにつける
     # 他にも startapp あたりのレスキューを後々作っておきたい
-    print("Now developing.....")
+    runserver_message = (
+        "Although there are no server running actually, "
+        "you can use the following functions instead."
+    )
+    print(runserver_message)
+    print("Please select.")
+    while True:
+        choice = input("1: admin\n2: signup\n0: exit\n")
+        if choice == "1":
+            admin()
+        elif choice == "2":
+            signup()
+        elif choice == "0":
+            print("Operation cancelled.")
+            break
+        else:
+            print("please retry to select.")
 
-    users = Users()
-    users.read_users()
-    user = users.latest_user()
-    print(user.data())
+
+def admin():
+    """
+    superuser=Trueのデータでログイン
+    Usersのデータの閲覧などができる
+    開発中。。。
+    """
+    print("admin")
+
+
+def signup():
+    """
+    superuser=FalseのUserが作れる。
+    開発中。。。
+    """
+    print("sign up")
