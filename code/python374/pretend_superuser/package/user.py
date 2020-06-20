@@ -62,6 +62,15 @@ class User:
             self.created_at, str(self.superuser)
         ]
 
+    def info(self):
+        """
+        出力用に、インスタンス変数の辞書を返す関数。
+        """
+        field_name = ["id", "username", "email"]
+        field_value = [self.id, self.username, self.email]
+        info = dict(zip(field_name, field_value))
+        return info
+
     def create_user(self):
         """
         Userインスタンスをcsvファイルに書き込み、永続化するための関数。

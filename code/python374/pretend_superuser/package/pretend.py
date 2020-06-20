@@ -9,7 +9,10 @@ def createsuperuser():
     現在開発中...
     """
     username, email, password = receive_inputs()
-    user = User.new_user(username, email, password, str_now())
+    user = User.new_user(
+        username, email, password,
+        str_now(), superuser=True
+    )
     user.create_user()
     print("Pretend to create superuser successfully.")
 
@@ -25,9 +28,9 @@ def runserver():
     runserver_message = (
         "Although there are no server running actually, "
         "you can use the following functions instead."
+        "\nPlease select."
     )
     print(runserver_message)
-    print("Please select.")
     while True:
         choice = input("1: admin\n2: signup\n0: exit\n")
         if choice == "1":
@@ -55,4 +58,11 @@ def signup():
     superuser=FalseのUserが作れる。
     開発中。。。
     """
-    print("sign up")
+    username, email, password = receive_inputs()
+    user = User.new_user(username, email, password, str_now())
+    user.create_user()
+    print("--Your info--")
+    for k, v in user.info().items():
+        print(k, v, sep=": ")
+    print("-----")
+    print("Pretend to signup successfully!")
