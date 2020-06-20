@@ -35,7 +35,8 @@ class Users:
                     columns[3], columns[4], columns[5]
                 )
                 user = User(
-                    u_id, username, email, password, created_at, superuser
+                    username, email, password, created_at,
+                    u_id=u_id, superuser=superuser
                 )
                 self.users.append(user)
 

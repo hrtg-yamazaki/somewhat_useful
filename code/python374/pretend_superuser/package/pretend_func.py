@@ -1,4 +1,4 @@
-from .user import User, Validator
+from .user import Users, User, Validator
 
 
 def receive_inputs():
@@ -25,3 +25,23 @@ def receive_inputs():
         password_conf = input("Password (again): ")
     
     return username, email, password
+
+
+def sign_in_admin():
+    """
+    admin_mode用のユーザ認証関数。
+    """
+    print("---sign in---")
+    users = Users()
+    users.read_users()
+    input_username = input("Username: ")
+    for user in reversed(users.users): # reversedはユニーク制約作成までの凌ぎ
+        if user.username == input_username:
+            input_password = input("Password: ")
+            while user.password != input_password:
+                print("Please type and enter again.")
+                input_password = input("Password: ")
+            if user.password == input_password:
+                print("Sign in successfully.")
+                return True
+    return False
