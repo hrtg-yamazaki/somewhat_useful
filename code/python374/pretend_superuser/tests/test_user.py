@@ -10,7 +10,7 @@ sys.path.append(str(project_path))
 
 import unittest
 from package.user import User, Validator
-
+from package.general import str_now
 
 class TestUser(unittest.TestCase):
 
@@ -18,8 +18,14 @@ class TestUser(unittest.TestCase):
         """
         User.data()のユニットテスト。
         """
-        user = User("testuser", "test@test.com", "techtech", superuser="True")
-        expected = "testuser\ntest@test.com\ntechtech\nTrue"
+        expected = [
+            255, "testuser", "test@test.com", "techtech",
+            "2020/06/21_14:30:00", "True"
+        ]
+        user = User(
+            "testuser", "test@test.com", "techtech",
+            "2020/06/21_14:30:00", u_id = 255, superuser="True"
+        )
         actual = user.data()
 
         self.assertEqual(expected, actual)
@@ -29,7 +35,9 @@ class TestUser(unittest.TestCase):
         superuser属性の指定をせずインスタンスを作成した時、
         superuser属性がFalseになっているかどうかのテスト。
         """
-        user = User("testuser", "test@test.com", "techtech")
+        user = User(
+            "testuser", "test@test.com", "techtech", str_now()
+        )
         
         self.assertFalse(user.superuser)
 
