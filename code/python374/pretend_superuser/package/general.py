@@ -9,6 +9,19 @@ os.chdir(Path(__file__).parent.parent)
 USERS_CSV_PATH = "csv/users.csv"
 
 
+def receive_input(message, test_value=""):
+    """
+    標準入力を受け取り返す関数。
+    テスト用に引数test_valueを指定でき、指定があった場合は
+    標準入力を飛ばしてその値をそのまま返す。
+    """
+    if len(test_value) == 0:
+        input_value = input(message)
+        return input_value
+    else:
+        return test_value
+
+
 def str_now():
     """
     現在時刻を表示用フォーマットの文字列に変換して返す関数

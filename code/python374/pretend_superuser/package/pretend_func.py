@@ -1,7 +1,8 @@
 from .user import Users, User, Validator
+from general import receive_input
 
 
-def receive_inputs():
+def registration():
     """
     コンソールからの入力を受け取る関数。
     受け取りはカラムごとに一回ずつ。
@@ -61,6 +62,7 @@ def reset_csv_file(path):
         with open(path, "w", encoding="utf-8") as f:
             f.write("")
         print("Reset [", path , "] successfully.")
+        print("Exiting...")
         exit()
     else:
         print("Operation cancelled.")

@@ -1,5 +1,5 @@
-from .pretend_func import receive_inputs, sign_in_admin, reset_csv_file
-from .general import str_now
+from .pretend_func import registration, sign_in_admin, reset_csv_file
+from .general import str_now, receive_input
 from .user import User, Users, USERS_CSV_PATH
 
 
@@ -8,7 +8,7 @@ def createsuperuser():
     コマンドライン引数に createsuperuser を受け取った場合の実行関数。
     現在開発中...
     """
-    username, email, password = receive_inputs()
+    username, email, password = registration()
     user = User.new_user(
         username, email, password,
         str_now(), superuser=True
@@ -71,7 +71,7 @@ def signup():
     """
     superuser=FalseのUserを作ることができる関数。
     """
-    username, email, password = receive_inputs()
+    username, email, password = registration()
     user = User.new_user(username, email, password, str_now())
     user.create_user()
     print("--Your info--")
