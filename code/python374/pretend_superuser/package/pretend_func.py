@@ -44,4 +44,23 @@ def sign_in_admin():
             if user.password == input_password:
                 print("Sign in successfully.")
                 return True
+    print("No user is founded.")
     return False
+
+
+def reset_csv_file(path):
+    """
+    引数のpathで指定したファイルのcsvファイルの内容を空にする関数。
+    """
+    print("Are you sure you want to delete all contents in")
+    print(">>>\t" + path)
+    print("Please confirm.")
+    conf = input("y/N: ")
+    yes_list = ["y" , "Y", "Yes"]
+    if conf in yes_list:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write("")
+        print("Reset [", path , "] successfully.")
+        exit()
+    else:
+        print("Operation cancelled.")

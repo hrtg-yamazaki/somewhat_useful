@@ -1,6 +1,6 @@
-from .pretend_func import receive_inputs, sign_in_admin
+from .pretend_func import receive_inputs, sign_in_admin, reset_csv_file
 from .general import str_now
-from .user import User, Users
+from .user import User, Users, USERS_CSV_PATH
 
 
 def createsuperuser():
@@ -22,6 +22,7 @@ def runserver():
     コマンドライン引数に runserver を受け取った場合の実行関数。
     未実装。
     """
+    print("[ Exit: Ctrl + c ]")
     runserver_message = (
         "Although there are no server running actually, "
         "you can use the following functions instead."
@@ -56,9 +57,9 @@ def admin():
             "1: show all users\n2: reset csv file\n0: exit\n"
         )
         if choice == "1":
-            print("show_all_users")
+            print("show all users")
         elif choice == "2":
-            print("reset csv file")
+            reset_csv_file(USERS_CSV_PATH)
         elif choice == "0":
             print("Exited from admin-mode...")
             break
