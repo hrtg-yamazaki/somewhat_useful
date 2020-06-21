@@ -1,5 +1,5 @@
 from .user import Users, User, Validator
-from general import receive_input
+from .general import receive_input
 
 
 def registration():
@@ -9,21 +9,20 @@ def registration():
     返り値はタプルで、呼び出し元にてアンパック代入。
     """
     v = Validator()
-    
     # username
-    username = input("Username: ")
+    username = receive_input("Username: ")
     while not v.username_is_valid(username):
-        username = input("Username: ")
+        username = receive_input("Username: ")
     # email
-    email = input("Email address: ")
+    email = receive_input("Email address: ")
     while not v.email_is_valid(email):
-        email = input("Email address: ")
+        email = receive_input("Email address: ")
     # password
-    password = input("Password: ")
-    password_conf = input("Password (again): ")
+    password = receive_input("Password: ")
+    password_conf = receive_input("Password (again): ")
     while not v.password_is_valid(password, password_conf):
-        password = input("Password: ")
-        password_conf = input("Password (again): ")
+        password = receive_input("Password: ")
+        password_conf = receive_input("Password (again): ")
     
     return username, email, password
 
@@ -35,13 +34,13 @@ def sign_in_admin():
     print("---sign in---")
     users = Users()
     users.read_users()
-    input_username = input("Username: ")
+    input_username = receive_input("Username: ")
     for user in reversed(users.users): # reversedはユニーク制約作成までの凌ぎ
         if user.username == input_username:
-            input_password = input("Password: ")
+            input_password = receive_input("Password: ")
             while user.password != input_password:
                 print("Please type and enter again.")
-                input_password = input("Password: ")
+                input_password = receive_input("Password: ")
             if user.password == input_password:
                 print("Sign in successfully.")
                 return True
@@ -56,7 +55,7 @@ def reset_csv_file(path):
     print("Are you sure you want to delete all contents in")
     print(">>>\t" + path)
     print("Please confirm.")
-    conf = input("y/N: ")
+    conf = receive_input("y/N: ")
     yes_list = ["y" , "Y", "Yes"]
     if conf in yes_list:
         with open(path, "w", encoding="utf-8") as f:

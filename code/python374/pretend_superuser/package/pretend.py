@@ -30,7 +30,7 @@ def runserver():
     )
     print(runserver_message)
     while True:
-        choice = input("1: admin\n2: signup\n0: exit\n")
+        choice = receive_input("1: admin\n2: signup\n0: exit\n")
         if choice == "1":
             admin()
         elif choice == "2":
@@ -53,7 +53,7 @@ def admin():
         return
     # 選択画面
     while True:
-        choice = input(
+        choice = receive_input(
             "1: show all users\n2: reset csv file\n0: exit\n"
         )
         if choice == "1":
