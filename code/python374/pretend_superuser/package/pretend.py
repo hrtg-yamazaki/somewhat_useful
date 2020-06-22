@@ -73,7 +73,7 @@ def signup():
     """
     username, email, password = registration()
     user = User.new_user(username, email, password, str_now())
-    user.create_user()
+    user.create_user(USERS_CSV_PATH)
     print("--Your info--")
     for k, v in user.info().items():
         print(k, v, sep=": ", end=", ")

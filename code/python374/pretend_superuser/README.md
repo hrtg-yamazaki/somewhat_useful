@@ -3,14 +3,15 @@
 djangoのコマンドを模した、パロディのプログラムです。  
 argparseやunittest、csvなど、  
 pythonの標準ライブラリの復習を目的に作成中です。  
-
+  
 #### 動作に関して
 
 現在開発中のため多くは未実装ですが、  
-djangoのmanage.pyと同じ感覚で起動できるようにしています。  
+djangoのmanage.pyと同じ感覚で起動できる状態を目指しています。  
 
 現状、  
 ```
-$ python3 manage.py createsuperuser
+$ python3 manage.py createsuperuser  
+$ python3 manage.py runserver
 ```
 が、利用可能です。  
