@@ -13,7 +13,7 @@ def createsuperuser():
         username, email, password,
         str_now(), superuser=True
     )
-    user.create_user()
+    user.create_user(USERS_CSV_PATH)
     print("Pretend to create superuser successfully.")
 
 

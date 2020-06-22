@@ -22,16 +22,16 @@ class Users:
         user = self.users[-1]
         return user
 
-    def read_users(self):
+    def read_users(self, path):
         """
         user.csvファイルに記録されている全てのUserを、
         インスタンス化したのちにself.usersに格納する関数。
         """
-        with open(USERS_CSV_PATH, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             for row in f:
                 columns = row.rstrip().split(",")
                 u_id, username, email, password, created_at, superuser = (
-                    columns[0], columns[1], columns[2],
+                    int(columns[0]), columns[1], columns[2],
                     columns[3], columns[4], columns[5]
                 )
                 user = User(
@@ -73,11 +73,11 @@ class User:
         info = dict(zip(field_name, field_value))
         return info
 
-    def create_user(self):
+    def create_user(self, path):
         """
         Userインスタンスをcsvファイルに書き込み、永続化するための関数。
         """
-        with open(USERS_CSV_PATH, "a", encoding="utf-8") as f:
+        with open(path, "a", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(self.data())
 

@@ -1,5 +1,5 @@
 from .user import Users, User, Validator
-from .general import receive_input
+from .general import receive_input, USERS_CSV_PATH
 
 
 def registration():
@@ -33,7 +33,7 @@ def sign_in_admin():
     """
     print("---sign in---")
     users = Users()
-    users.users = users.read_users()
+    users.users = users.read_users(USERS_CSV_PATH)
     input_username = receive_input("Username: ")
     for user in reversed(users.users): # reversedはユニーク制約作成までの凌ぎ
         if user.username == input_username:
