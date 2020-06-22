@@ -39,6 +39,7 @@ class Users:
                     u_id=u_id, superuser=superuser
                 )
                 self.users.append(user)
+        return self.users
 
 
 class User:

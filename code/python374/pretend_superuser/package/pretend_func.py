@@ -33,7 +33,7 @@ def sign_in_admin():
     """
     print("---sign in---")
     users = Users()
-    users.read_users()
+    users.users = users.read_users()
     input_username = receive_input("Username: ")
     for user in reversed(users.users): # reversedはユニーク制約作成までの凌ぎ
         if user.username == input_username:

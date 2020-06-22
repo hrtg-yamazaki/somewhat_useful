@@ -9,8 +9,45 @@ sys.path.append(str(project_path))
 
 
 import unittest
-from package.user import User, Validator
+from package.user import Users, User, Validator
 from package.general import str_now
+
+
+class TestUsers(unittest.TestCase):
+
+    def test_users(self):
+        """
+        Users.__init__()のテスト。
+        """
+        expected = []
+        users = Users()
+        actual = users.users
+        self.assertEqual(expected, actual)
+
+    def test_latest_user(self):
+        """
+        Users.latest_user()のテスト。
+        """
+        users = Users()
+        user1 = User(
+            "test1", "test@test.com", "techtech", str_now()
+        )
+        user2 = User(
+            "test2", "test2@test.com", "techtech", str_now()
+        )
+        users.users = [user1, user2]
+        expected = user2
+        actual = users.latest_user()
+        self.assertEqual(expected, actual)
+
+    def test_read_users(self):
+        """
+        Users.read_usersのテスト。
+        # tempfileを復習してから取り組む
+        """
+        pass
+
+
 
 class TestUser(unittest.TestCase):
 
@@ -27,7 +64,6 @@ class TestUser(unittest.TestCase):
             "2020/06/21_14:30:00", u_id = 255, superuser="True"
         )
         actual = user.data()
-
         self.assertEqual(expected, actual)
     
     def test_superuser_is_false_without_input(self):
@@ -38,8 +74,22 @@ class TestUser(unittest.TestCase):
         user = User(
             "testuser", "test@test.com", "techtech", str_now()
         )
-        
         self.assertFalse(user.superuser)
+    
+    def test_info(self):
+        """
+        User.infoのテスト。
+        """
+        expected = {
+            "id": 255, "username": "testuser",
+            "email":  "test@test.com"
+        }
+        user = User(
+            "testuser", "test@test.com", "techtech",
+            str_now(), u_id = 255
+        )
+        actual = user.info()
+        self.assertEqual(expected, actual)
 
 
 class TestValidator(unittest.TestCase):
