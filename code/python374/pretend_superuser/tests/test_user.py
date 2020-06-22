@@ -92,7 +92,7 @@ class TestUser(unittest.TestCase):
             "testuser", "test@test.com", "techtech", str_now()
         )
         self.assertFalse(user.superuser)
-    
+
     def test_info(self):
         """
         User.infoのテスト。
@@ -107,6 +107,21 @@ class TestUser(unittest.TestCase):
         )
         actual = user.info()
         self.assertEqual(expected, actual)
+
+    def test_create_user(self):
+        """
+        create_userのテスト。
+        """
+        user = User.new_user(
+            "testuser", "test@test.com", "techtech",
+            str_now(), u_id = 255
+        )
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d + "temp.csv")
+            user.create_user(path)
+            with open(path, "r", encoding="utf-8") as f:
+                for row in f:
+                    self.assertIn("testuser", row)
 
 
 class TestValidator(unittest.TestCase):
