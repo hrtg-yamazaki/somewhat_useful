@@ -1,7 +1,7 @@
 import re
 import csv
 from datetime import datetime
-from .general import USERS_CSV_PATH, next_id, length_check
+from .general import USERS_CSV_PATH, next_id, length_check, adjust_width
 
 
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
@@ -45,36 +45,38 @@ class Users:
         """
         self.usersを表示用フォーマットに変換して出力する関数。
         """
-        output = []  # 表示用データのリスト
-
+        # 表示するデータをピックアップし、列ごとのリストに格納
+        row_list = self.make_row_list()
+        # カラム別最大長の確認と更新
         header = User.column_list
-        output.append(header)
         column_width_list = [ len(header[i]) for i in range(len(header)) ]
-        borders = [ "-" for _ in range(len(header)) ]  # カラムの数だけボーダーを用意
-        output.append(borders)
         for user in self.users:
             data = user.data()
-            output.append(data)
-            # カラム別最大長の確認と更新
-            for i in range(4):
+            for i in range(len(header)):
                 column_width_list[i] = length_check(column_width_list[i], len(data[i]))
-        # created_atとsuperuserは固定長
-        column_width_list[4] = 19
-        column_width_list[5] = 9
-        output.append(borders)
+        # 最大長に合わせて横幅を調整し、文字列化したものを返り値に
+        output_list = adjust_width(row_list, column_width_list)
+        output_str = "\n".join(output_list)
+        return output_str
 
-        result = []
-        for line in output:
-            for i in range(len(line)):
-                if len(line[i]) < column_width_list[i]:
-                    dif = column_width_list[i] - len(line[i])
-                    if line[i] == "-":
-                        line[i] = "-" * dif + line[i] 
-                    else:
-                        line[i] = " " * dif + line[i]
-            result.append("| " + " | ".join(line) + " |\n")
+    def make_row_list(self):
+        """
+        表示する内容をピックアップし、
+        カラム名とボーダーラインを含むリストを返す関数。
+        """
+        row_list = []
+        # 見出し(カラム名)
+        row_list.append(User.column_list)
+        # カラムの数だけボーダーを用意
+        borders = [ "-" for _ in range(len(User.column_list)) ]
+        row_list.append(borders)
+        # ユーザーのデータを入れる
+        for user in self.users:
+            row_list.append(user.data())
+        # 末尾のボーダーも追加
+        row_list.append(borders)
+        return row_list
 
-        return result
 
 class User:
 

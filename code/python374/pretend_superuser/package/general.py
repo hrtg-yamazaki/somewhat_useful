@@ -60,3 +60,19 @@ def length_check(default, comparison):
     if default < comparison:
         default = comparison
     return default
+
+
+def adjust_width(lst, width_list):
+    """
+    """
+    result = []
+    for line in lst:
+        for i in range(len(line)):
+            if len(line[i]) < width_list[i]:
+                dif = width_list[i] - len(line[i])
+                if line[i] == "-":
+                    line[i] = "-" * dif + line[i] 
+                else:
+                    line[i] = " " * dif + line[i]
+        result.append("| " + " | ".join(line) + " |")
+    return result
