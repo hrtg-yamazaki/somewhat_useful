@@ -1,4 +1,4 @@
-from .pretend_func import registration, sign_in_admin, reset_csv_file
+from .pretend_func import registration, sign_in_admin, browse_users_list, reset_csv_file
 from .general import str_now, receive_input
 from .user import User, Users, USERS_CSV_PATH
 
@@ -57,7 +57,7 @@ def admin():
             "1: show all users\n2: reset csv file\n0: exit\n"
         )
         if choice == "1":
-            print("show all users")
+            browse_users_list()
         elif choice == "2":
             reset_csv_file(USERS_CSV_PATH)
         elif choice == "0":

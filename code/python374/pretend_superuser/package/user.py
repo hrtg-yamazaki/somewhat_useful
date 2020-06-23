@@ -41,6 +41,18 @@ class Users:
                 self.users.append(user)
         return self.users
 
+    def show_all_users(self):
+        """
+        self.usersを表示用フォーマットに変換して出力する関数。
+        """
+        output = []
+        output.append("----------")
+        output.append("id, username, email, password, created_at, superuser")
+        for user in self.users:
+            output.append(", ".join(map(str, user.data())))
+        output.append("----------")
+        return "\n".join(output)
+
 
 class User:
     

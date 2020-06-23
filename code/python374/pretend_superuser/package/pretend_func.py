@@ -48,6 +48,15 @@ def sign_in_admin():
     return False
 
 
+def browse_users_list():
+    """
+    登録されているユーザーの一覧を表示する関数。
+    """
+    users = Users()
+    users.users = users.read_users(USERS_CSV_PATH)
+    print(users.show_all_users())
+
+
 def reset_csv_file(path):
     """
     引数のpathで指定したファイルのcsvファイルの内容を空にする関数。
