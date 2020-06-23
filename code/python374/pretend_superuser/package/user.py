@@ -46,31 +46,40 @@ class Users:
         self.usersを表示用フォーマットに変換して出力する関数。
         """
         output = []  # 表示用データのリスト
-        header = ["id", "username", "email", "password", "created_at", "superuser"]
+
+        header = User.column_list
         output.append(header)
-        border = ["--", "--------", "-----", "--------", "----------", "---------"]
-        output.append(border)
-        column_width_list = [2, 8, 5, 8, 19, 9]  # created_at, supeuserは固定
+        column_width_list = [ len(header[i]) for i in range(len(header)) ]
+        borders = [ "-" for _ in range(len(header)) ]  # カラムの数だけボーダーを用意
+        output.append(borders)
         for user in self.users:
             data = user.data()
             output.append(data)
             # カラム別最大長の確認と更新
             for i in range(4):
                 column_width_list[i] = length_check(column_width_list[i], len(data[i]))
-        output.append(border)
+        # created_atとsuperuserは固定長
+        column_width_list[4] = 19
+        column_width_list[5] = 9
+        output.append(borders)
 
+        result = []
         for line in output:
             for i in range(len(line)):
                 if len(line[i]) < column_width_list[i]:
                     dif = column_width_list[i] - len(line[i])
-                    if line[0][0] == "-":
+                    if line[i] == "-":
                         line[i] = "-" * dif + line[i] 
                     else:
                         line[i] = " " * dif + line[i]
-            print("|", " | ".join(line), "|")
+            result.append("| " + " | ".join(line) + " |\n")
+
+        return result
 
 class User:
-    
+
+    column_list = ["id", "username", "email", "password", "created_at", "superuser"]
+
     def __init__(
             self, username, email, password, created_at,
             superuser=False, u_id=next_id(USERS_CSV_PATH)

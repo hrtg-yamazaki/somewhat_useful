@@ -54,7 +54,7 @@ def browse_users_list():
     """
     users = Users()
     users.users = users.read_users(USERS_CSV_PATH)
-    users.show_all_users()
+    print("".join(users.show_all_users()))
 
 
 def reset_csv_file(path):
