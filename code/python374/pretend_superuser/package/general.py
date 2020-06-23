@@ -51,3 +51,12 @@ def next_id(path):
     else:
         id = int(row.rstrip().split(",")[0]) + 1
     return id
+
+
+def length_check(default, comparison):
+    """
+    intで与えられた引数２つを比較し、文字長の大きい方を返す関数
+    """
+    if default < comparison:
+        default = comparison
+    return default

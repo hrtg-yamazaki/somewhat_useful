@@ -1,7 +1,7 @@
 import re
 import csv
 from datetime import datetime
-from .general import USERS_CSV_PATH, next_id
+from .general import USERS_CSV_PATH, next_id, length_check
 
 
 USERNAME_REGEX = r"^[a-zA-Z0-9-_]{4,30}$"
@@ -45,14 +45,29 @@ class Users:
         """
         self.usersを表示用フォーマットに変換して出力する関数。
         """
-        output = []
-        output.append("----------")
-        output.append("id, username, email, password, created_at, superuser")
+        output = []  # 表示用データのリスト
+        header = ["id", "username", "email", "password", "created_at", "superuser"]
+        output.append(header)
+        border = ["--", "--------", "-----", "--------", "----------", "---------"]
+        output.append(border)
+        column_width_list = [2, 8, 5, 8, 19, 9]  # created_at, supeuserは固定
         for user in self.users:
-            output.append(", ".join(map(str, user.data())))
-        output.append("----------")
-        return "\n".join(output)
+            data = user.data()
+            output.append(data)
+            # カラム別最大長の確認と更新
+            for i in range(4):
+                column_width_list[i] = length_check(column_width_list[i], len(data[i]))
+        output.append(border)
 
+        for line in output:
+            for i in range(len(line)):
+                if len(line[i]) < column_width_list[i]:
+                    dif = column_width_list[i] - len(line[i])
+                    if line[0][0] == "-":
+                        line[i] = "-" * dif + line[i] 
+                    else:
+                        line[i] = " " * dif + line[i]
+            print("|", " | ".join(line), "|")
 
 class User:
     
@@ -72,7 +87,7 @@ class User:
         書き込み用、デバッグ用にインスタンス変数のリストを返す関数。
         """
         return [
-            self.id, self.username, self.email, self.password,
+            str(self.id), self.username, self.email, self.password,
             self.created_at, str(self.superuser)
         ]
 
