@@ -20,7 +20,6 @@ def createsuperuser():
 def runserver():
     """
     コマンドライン引数に runserver を受け取った場合の実行関数。
-    未実装。
     """
     print("[ Exit: Ctrl + c ]")
     runserver_message = (

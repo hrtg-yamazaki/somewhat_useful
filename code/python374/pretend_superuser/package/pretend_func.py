@@ -1,4 +1,5 @@
-from .user import Users, User, Validator
+from .user import Users, User
+from .validator import Validator
 from .general import receive_input, USERS_CSV_PATH
 
 
@@ -42,8 +43,12 @@ def sign_in_admin():
                 print("Please type and enter again.")
                 input_password = receive_input("Password: ")
             if user.password == input_password:
-                print("Sign in successfully.")
-                return True
+                if user.superuser == True:
+                    print("Sign in successfully.")
+                    return True
+                else:
+                    print("Permission Denied.")
+                    return False
     print("No user is founded.")
     return False
 

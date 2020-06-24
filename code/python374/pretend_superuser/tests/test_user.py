@@ -10,7 +10,8 @@ sys.path.append(str(project_path))
 
 
 import unittest
-from package.user import Users, User, Validator
+from package.user import Users, User
+from package.validator import Validator
 from package.general import str_now
 
 
@@ -73,7 +74,7 @@ class TestUser(unittest.TestCase):
         User.data()のユニットテスト。
         """
         expected = [
-            255, "testuser", "test@test.com", "techtech",
+            "255", "testuser", "test@test.com", "techtech",
             "2020/06/21_14:30:00", "True"
         ]
         user = User(

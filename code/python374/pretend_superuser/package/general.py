@@ -64,6 +64,8 @@ def length_check(default, comparison):
 
 def adjust_width(lst, width_list):
     """
+    引数lstで受け取ったリストの横幅を、
+    対応するwidth_listの値に合わせてスペースを追加し調整する関数。
     """
     result = []
     for line in lst:
