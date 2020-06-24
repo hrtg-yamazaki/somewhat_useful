@@ -1,6 +1,6 @@
 from .user import Users, User
 from .validator import Validator
-from .general import receive_input, USERS_CSV_PATH
+from .general import receive_input, USERS_CSV_PATH, translate_bool
 
 
 def registration():
@@ -43,7 +43,7 @@ def sign_in_admin():
                 print("Please type and enter again.")
                 input_password = receive_input("Password: ")
             if user.password == input_password:
-                if user.superuser == "True":
+                if translate_bool(user.superuser):
                     print("Sign in successfully.")
                     return True
                 else:

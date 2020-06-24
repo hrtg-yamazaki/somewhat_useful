@@ -78,3 +78,13 @@ def adjust_width(lst, width_list):
                     line[i] = " " * dif + line[i]
         result.append("| " + " | ".join(line) + " |")
     return result
+
+
+def translate_bool(string):
+    """
+    文字列のTrue/Falseをboolに変換する関数。
+    """
+    if string == "True":
+        return True
+    else:
+        return False
