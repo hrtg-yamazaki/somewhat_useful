@@ -43,7 +43,7 @@ def sign_in_admin():
                 print("Please type and enter again.")
                 input_password = receive_input("Password: ")
             if user.password == input_password:
-                if user.superuser == True:
+                if user.superuser == "True":
                     print("Sign in successfully.")
                     return True
                 else:
