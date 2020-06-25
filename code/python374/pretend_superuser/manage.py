@@ -29,7 +29,6 @@ def main(func):
     このプログラムの実行関数。
     コマンドライン引数を受け取って、起動する関数を振り分ける。
     """
-    general.set_users_csv()
     if func == "createsuperuser":
         pretend.createsuperuser()
     elif func == "runserver":

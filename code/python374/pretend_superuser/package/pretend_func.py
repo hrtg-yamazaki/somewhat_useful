@@ -72,8 +72,9 @@ def reset_csv_file(path):
     conf = receive_input("y/N: ")
     yes_list = ["y" , "Y", "Yes"]
     if conf in yes_list:
-        with open(path, "w", encoding="utf-8") as f:
-            f.write("")
+        with open(path, "w", encoding="utf-8"):
+            pass
+        Users.set_users_csv()
         print("Reset [", path , "] successfully.")
         print("Exiting...")
         exit()

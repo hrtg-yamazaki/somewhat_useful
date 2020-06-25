@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import csv
 
+
 # "~/pretend_superuser"をsys.pathに追加
 project_path = Path(__file__).parent.parent
 sys.path.append(str(project_path))

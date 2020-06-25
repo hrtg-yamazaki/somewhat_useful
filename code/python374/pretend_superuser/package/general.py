@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from datetime import datetime
+import csv
 
 
 os.chdir(Path(__file__).parent.parent)
@@ -29,20 +30,13 @@ def str_now():
     return datetime.now().strftime("%Y/%m/%d_%H:%M:%S")
 
 
-def set_users_csv():
-    """
-    users.csvファイルがなければ作成しておくための関数。
-    """
-    with open(USERS_CSV_PATH, "a", encoding="utf-8"):
-        pass
-
-
 def next_id(path):
     """
     csvファイルの行数を数え、0なら1を返す。
     0でなければ、最終行のレコードのid + 1 を返す。
     """
     with open(path, "r", encoding="utf-8") as f:
+        next(f)
         count = 0
         for row in f:
             count += 1

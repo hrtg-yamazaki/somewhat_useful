@@ -1,3 +1,4 @@
+import os
 import csv
 from datetime import datetime
 from .general import USERS_CSV_PATH, next_id, length_check, adjust_width
@@ -21,6 +22,7 @@ class Users:
         インスタンス化したのちにself.usersに格納する関数。
         """
         with open(path, "r", encoding="utf-8") as f:
+            next(f) # headerを読み飛ばす
             for row in f:
                 columns = row.rstrip().split(",")
                 u_id, username, email, password, created_at, superuser = (
@@ -41,7 +43,7 @@ class Users:
         # 表示するデータをピックアップし、列ごとのリストに格納
         row_list = self.make_row_list()
         # カラム別最大長の確認と更新
-        header = User.column_list
+        header = User.field_names
         column_width_list = [ len(header[i]) for i in range(len(header)) ]
         for user in self.users:
             data = user.data()
@@ -59,9 +61,9 @@ class Users:
         """
         row_list = []
         # 見出し(カラム名)
-        row_list.append(User.column_list)
+        row_list.append(User.field_names)
         # カラムの数だけボーダーを用意
-        borders = [ "-" for _ in range(len(User.column_list)) ]
+        borders = [ "-" for _ in range(len(User.field_names)) ]
         row_list.append(borders)
         # ユーザーのデータを入れる
         for user in self.users:
@@ -70,10 +72,20 @@ class Users:
         row_list.append(borders)
         return row_list
 
+    @staticmethod
+    def set_users_csv():
+        """
+        users.csvファイルがなければ作成しておくための関数。
+        """
+        target = USERS_CSV_PATH
+        with open(target, "a", encoding="utf-8") as f:
+            if os.path.getsize(target) == 0:  # headerがなければ書き込み
+                f.write(",".join(User.field_names) + "\n")
+
 
 class User:
 
-    column_list = ["id", "username", "email", "password", "created_at", "superuser"]
+    field_names = ["id", "username", "email", "password", "created_at", "superuser"]
 
     def __init__(
             self, username, email, password, created_at,

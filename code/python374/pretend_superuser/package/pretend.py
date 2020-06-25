@@ -8,6 +8,7 @@ def createsuperuser():
     コマンドライン引数に createsuperuser を受け取った場合の実行関数。
     現在開発中...
     """
+    Users.set_users_csv()
     username, email, password = registration()
     user = User.new_user(
         username, email, password,
@@ -21,6 +22,7 @@ def runserver():
     """
     コマンドライン引数に runserver を受け取った場合の実行関数。
     """
+    Users.set_users_csv()
     print("[ Exit: Ctrl + c ]")
     runserver_message = (
         "Although there are no server running actually, "
