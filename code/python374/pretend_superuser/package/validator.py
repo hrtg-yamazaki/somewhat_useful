@@ -1,4 +1,5 @@
 import re
+import getpass
 from .user import User
 
 
@@ -19,11 +20,12 @@ class Validator():
         """
         User.usernameのバリデーション。
         """
-        if not bool(re.match(USERNAME_REGEX, username)):
+        if not bool(re.match(USERNAME_REGEX, username)) or \
+                username == getpass.getuser():
             print(self.username_error(username))
             return False
         return True
-    
+
     def username_error(self, username):
         """
         User.usernameのバリデーションメッセージを返す関数。
@@ -87,4 +89,3 @@ class Validator():
         else:
             message = "Enter a valid password."
         return message
-  

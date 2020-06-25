@@ -1,3 +1,4 @@
+import getpass
 from .user import Users, User
 from .validator import Validator
 from .general import receive_input, USERS_CSV_PATH, translate_bool
@@ -11,9 +12,11 @@ def registration():
     """
     v = Validator()
     # username
-    username = receive_input("Username: ")
+    username_message = \
+       "Username (leave blank to use \'" + getpass.getuser() + "\'): "
+    username = receive_input(username_message)
     while not v.username_is_valid(username):
-        username = receive_input("Username: ")
+        username = receive_input(username_message)
     # email
     email = receive_input("Email address: ")
     while not v.email_is_valid(email):
