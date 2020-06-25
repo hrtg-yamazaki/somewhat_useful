@@ -1,17 +1,19 @@
 ## pretend_superuser
 
-djangoのコマンドを模した、パロディのプログラムです。  
-argparseやunittest、csvなど、  
-pythonの標準ライブラリの復習を目的に作成中です。  
+djangoのmanage.py関連コマンド入力時の挙動を模した、パロディプログラムです。  
+  
+pythonの標準ライブラリ(os, sys, argparse, csv, unittestなど)の  
+実践練習、復習を主な目的として作成しました。  
   
 #### 動作に関して
 
-現在開発中のため多くは未実装ですが、  
-djangoのmanage.pyと同じ感覚で起動できる状態を目指しています。  
-
-現状、  
+このリポジトリで管理されている他のプログラムとは違い、  
+`~/pretend_superuser/manage.py`が起動の起点になっています。  
+  
+コマンドについては、現状、以下の２種が利用可能です。
 ```
 $ python3 manage.py createsuperuser  
 $ python3 manage.py runserver
-```
-が、利用可能です。  
+```  
+csvファイルを利用したUserの作成、データの閲覧、削除ができます。  
+  
