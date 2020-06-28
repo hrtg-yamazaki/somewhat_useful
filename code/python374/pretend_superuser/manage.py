@@ -8,6 +8,11 @@ from package import pretend, user, general
 os.chdir(Path(__file__).parent)
 
 
+RED_COLOR = "\033[31m"
+BOLD_WEIGHT = '\033[1m'
+COLOR_RESET = "\033[0m"
+
+
 def default_message():
     """
     コマンドライン引数が何も受け取らなかった時に起動する関数。
@@ -21,7 +26,7 @@ def debug():
     デバッグ用の関数。
     個別の関数を呼び出し、正常に動いているかを確かめるのに使う。
     """
-    print(general.next_id("csv/users.csv"))
+    pass
 
 
 def main(func):
@@ -52,4 +57,8 @@ if __name__ == "__main__":
     try:
         main(args.function)
     except KeyboardInterrupt:
-        print("\nOperation cancelled.")
+        print(
+            "\n", RED_COLOR, BOLD_WEIGHT,
+            "Operation cancelled.",
+            COLOR_RESET, sep=""
+        )
