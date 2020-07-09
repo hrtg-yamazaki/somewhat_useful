@@ -4,7 +4,7 @@ from package import *
 
 
 # どこから起動してもopen関数のパス指定に影響が出ないよう、ディレクトリを切り替えておく
-os.chdir(Path(__file__).parent)
+os.chdir(Path("__file__").parent)
 # print(os.getcwd())  =>  ~/study_time_log
 
 border = "---------------------"

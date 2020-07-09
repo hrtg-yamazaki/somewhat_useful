@@ -5,7 +5,7 @@ from pathlib import Path
 from package import pretend, user, general
 
 
-os.chdir(Path(__file__).parent)
+os.chdir(Path("__file__").parent)
 
 
 RED_COLOR = "\033[31m"
